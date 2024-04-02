@@ -1,0 +1,31 @@
+// eslint-disable-next-line import/named
+import {displayCurrentLocation, displayCurrentStatus, displayCurrentCondition, displayTodayForcastCondition, displayHourlyTemperature, displayHourlyRainSnow} from './components/card'
+
+export function showWeather(current_city,current_state,current_country,current_temperature_c,current_temperature_f,current_condition_icon_link,current_condition_text,current_feelslike_c,current_feelslike_f,current_uv,current_humidity,current_wind_kph,current_wind_mph,current_wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,snow_cm,hourly_data) {
+    const current_weather = document.querySelector('.current-weather')
+    current_weather.innerHTML = ''
+    displayCurrentLocation(current_city,current_state,current_country)
+    displayCurrentStatus(true,current_temperature_c,current_condition_icon_link,current_condition_text,forecast_today_max_temperature_c,forecast_today_min_temperature_c) 
+    displayCurrentCondition(true,current_feelslike_c,current_uv,current_humidity,current_wind_kph,current_wind_mph,current_wind_direction)
+    // unitSelectionEvent(current_temperature_c,current_temperature_f,current_condition_icon_link,current_condition_text,current_feelslike_c,current_feelslike_f,current_uv,current_humidity,current_wind_kph,current_wind_mph,current_wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,snow_cm,hourly_data)
+    displayTodayForcastCondition(forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,snow_cm)
+    displayHourlyTemperature(true,hourly_data)
+    displayHourlyRainSnow(hourly_data)
+}
+
+export function updateWeather(temperature_unit_c,current_temperature_c,current_temperature_f,condition_icon,condition_text,current_feelslike_c,current_feelslike_f,uv,humidity,current_wind_kph,current_wind_mph,wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm,hourly_data) {
+    if (temperature_unit_c === true) {
+        displayCurrentStatus(true,current_temperature_c,condition_icon,condition_text,forecast_today_max_temperature_c,forecast_today_min_temperature_c)
+        displayCurrentCondition(true,current_feelslike_c,uv,humidity,current_wind_kph,current_wind_mph,wind_direction)
+        displayTodayForcastCondition(forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm)
+        displayHourlyTemperature(true,hourly_data)
+        displayHourlyRainSnow(hourly_data)
+    } else {
+        displayCurrentStatus(false,current_temperature_f,condition_icon,condition_text,forecast_today_max_temperature_f,forecast_today_min_temperature_f)
+        displayCurrentCondition(false,current_feelslike_f,uv,humidity,current_wind_kph,current_wind_mph,wind_direction)
+        displayTodayForcastCondition(forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm)
+        displayHourlyTemperature(false,hourly_data)
+        displayHourlyRainSnow(hourly_data)
+    }
+    
+}

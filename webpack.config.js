@@ -1,12 +1,22 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+// eslint-disable-next-line import/no-extraneous-dependencies
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
-    index: "./src/index.js",
+    index: {
+      import: "./src/index.js",
+      // dependOn: "shared",
+    },
+    display: {
+      import: "./src/display.js",
+      // dependOn: "shared",
+    }
+    // shared: 'lodash',
   },
   output: {
-    filename: "bundle.js",
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
@@ -59,5 +69,22 @@ module.exports = {
       // },
 
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+        new TerserPlugin({
+            terserOptions: {
+                format: {
+                    comments: false,
+                },
+            },
+            extractComments: false,
+        }),
+    ],
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 };

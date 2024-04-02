@@ -43,7 +43,7 @@ function createMinTemperatureCard(temperature_unit_c,min_temp){
     return min_temperature
 }
 
-export function createCurrentStatusCard(temperature_unit_c,temperature,condition_icon,condition_text,forecast_today_max_temperature,forecast_today_min_temperature) {
+function createCurrentStatusCard(temperature_unit_c,temperature,condition_icon,condition_text,forecast_today_max_temperature,forecast_today_min_temperature) {
     const current_card = document.createElement('div')
     current_card.classList.add('current-condition-card')
     const current_temperature = createCurrentTemperatureCard(temperature_unit_c,temperature)
@@ -58,7 +58,7 @@ export function createCurrentStatusCard(temperature_unit_c,temperature,condition
 }
 
 
-export function createFeelslikeCard(temperature_unit_c,feelslike) {
+function createFeelslikeCard(temperature_unit_c,feelslike) {
     const current_feelslike = document.createElement('div')
     current_feelslike.id = 'current-feelslike'
     current_feelslike.classList.add('card')
@@ -77,7 +77,7 @@ export function createFeelslikeCard(temperature_unit_c,feelslike) {
     return current_feelslike
 }
 
-export function createUVcard(uv) {
+function createUVcard(uv) {
     const current_uv = document.createElement('div')
     current_uv.id = 'uv'
     current_uv.classList.add('card')
@@ -92,7 +92,7 @@ export function createUVcard(uv) {
     return current_uv
 }
 
-export function createHumidityCard(humidity) {
+function createHumidityCard(humidity) {
     const current_humidity = document.createElement('div')
     current_humidity.id = 'humidity'
     current_humidity.classList.add('card')
@@ -107,7 +107,7 @@ export function createHumidityCard(humidity) {
     return current_humidity
 }
 
-export function createWindCard(wind_speed_mph,wind_speed_kph,wind_direction) {
+function createWindCard(wind_speed_mph,wind_speed_kph,wind_direction) {
     const wind = document.createElement('div')
     wind.id = 'wind'
     wind.classList.add('card2')
@@ -127,7 +127,7 @@ export function createWindCard(wind_speed_mph,wind_speed_kph,wind_direction) {
     return wind
 }
 
-export function createSunriseSunsetCard(sunrise,sunset) {
+function createSunriseSunsetCard(sunrise,sunset) {
     const sun = document.createElement('div')
     sun.id = 'sun'
     sun.classList.add('card2')
@@ -145,7 +145,7 @@ export function createSunriseSunsetCard(sunrise,sunset) {
     return sun
 }
 
-export function createRainCard(forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,paricipation_in,precip_mm) {
+function createRainCard(forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,paricipation_in,precip_mm) {
     const rain = document.createElement('div')
     rain.id = 'rain'
     rain.classList.add('card3')
@@ -164,7 +164,7 @@ export function createRainCard(forecast_today_daily_chance_of_rain,forecast_toda
     return rain
 }
 
-export function createSnowCard(forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm) {
+function createSnowCard(forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm) {
     const snow = document.createElement('div')
     snow.id = 'snow'
     snow.classList.add('card2')
@@ -183,7 +183,7 @@ export function createSnowCard(forecast_today_daily_chance_of_snow,forecast_toda
     return snow
 }
 
-export function createTemperatureLineChart(temperature_unit_c,label,data) {
+function createTemperatureLineChart(temperature_unit_c,label,data) {
     const ctx = document.getElementById('hourly-temp').getContext('2d');
     if (temperature_unit_c ===true) {
         // eslint-disable-next-line no-new
@@ -291,9 +291,8 @@ export function createTemperatureLineChart(temperature_unit_c,label,data) {
     
 }
 
-export function createRainSnowChart(label,data) {
+function createRainSnowChart(label,data) {
     const ctx = document.getElementById('hourly-rain').getContext('2d');
-
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -363,3 +362,124 @@ export function createRainSnowChart(label,data) {
         }
     });
 }
+
+
+
+export function displayCurrentLocation(city,state,country) {
+    const current_location = document.querySelector('.current-location')
+    current_location.innerHTML = ''
+    current_location.innerHTML = `<p class='city'>${city}</p> <p class='state-country'>${state}, ${country}</p>`
+}
+
+export function displayCurrentStatus(temperature_unit_c,temperature,condition_icon,condition_text,forecast_today_max_temperature,forecast_today_min_temperature) {
+    const current_weather = document.querySelector('.current-weather')
+    const current_card = createCurrentStatusCard(temperature_unit_c,temperature,condition_icon,condition_text,forecast_today_max_temperature,forecast_today_min_temperature)
+    current_weather.appendChild(current_card)
+}
+
+export function displayCurrentCondition(temperature_unit_c,feelslike,uv,humidity,wind_speed_kph,wind_speed_mph,wind_direction) {
+    const current_weather = document.querySelector('.current-weather')
+    
+    const cards = document.createElement('div')
+    cards.classList.add('cards')
+    current_weather.appendChild(cards)
+
+    const current_feelslike = createFeelslikeCard(temperature_unit_c,feelslike)
+    cards.appendChild(current_feelslike)
+
+    const current_uv = createUVcard(uv)
+    cards.appendChild(current_uv)
+
+    const current_humidity = createHumidityCard(humidity)
+    cards.appendChild(current_humidity)
+    
+    const wind = createWindCard(wind_speed_mph,wind_speed_kph,wind_direction)
+    cards.appendChild(wind)
+
+}
+export function displayTodayForcastCondition(forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm) {
+    const cards = document.querySelector('.cards')
+
+    const sun = createSunriseSunsetCard(forecast_today_sunrise,forecast_today_sunset)
+    cards.appendChild(sun)
+
+    const rain = createRainCard(forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm)
+    cards.appendChild(rain)
+
+    const snow = createSnowCard(forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm)
+    cards.appendChild(snow)
+}
+
+
+
+export function displayHourlyTemperature(temperature_unit_c,hourly_data) {
+    const current_weather = document.querySelector('.current-weather')
+    const hourly_temp = document.createElement('canvas')
+    hourly_temp.id = 'hourly-temp'
+    hourly_temp.classList.add('chart')
+    current_weather.appendChild(hourly_temp)
+    // eslint-disable-next-line prefer-const
+    let x = []
+    // eslint-disable-next-line prefer-const
+    let temperature_c = []
+    // eslint-disable-next-line prefer-const
+    let temperature_f = []
+    // eslint-disable-next-line prefer-const
+    let feelslike_c = []
+    // eslint-disable-next-line prefer-const
+    let feelslike_f = []
+    // eslint-disable-next-line no-restricted-syntax
+    for (const hour of hourly_data){
+        const time = hour.time.split(' ')[1]
+        x.push(time)
+        temperature_c.push(hour.temp_c)
+        temperature_f.push(hour.temp_f)
+        feelslike_c.push(hour.feelslike_c)
+        feelslike_f.push(hour.feelslike_f)
+    }
+    const data_c = {
+        temperature: temperature_c,
+        feelslike: feelslike_c
+    }
+    const data_f = {
+        temperature: temperature_f,
+        feelslike: feelslike_f
+    }
+    if (temperature_unit_c === true) {
+        createTemperatureLineChart(true,x,data_c)
+    } else {
+        createTemperatureLineChart(false,x,data_f)
+    }
+    
+}
+export function displayHourlyRainSnow(hourly_data) {
+    const current_weather = document.querySelector('.current-weather')
+    const hourly_rain = document.createElement('canvas')
+    hourly_rain.id = 'hourly-rain'
+    hourly_rain.classList.add('chart')
+    current_weather.appendChild(hourly_rain)
+    // eslint-disable-next-line prefer-const
+    let x = []
+    // eslint-disable-next-line prefer-const
+    let rain_chance = []
+    // eslint-disable-next-line prefer-const
+    let rain_precip_mm = []
+    // eslint-disable-next-line prefer-const
+    let snow_chance = []
+    // eslint-disable-next-line no-restricted-syntax
+    for (const hour of hourly_data){
+        const time = hour.time.split(' ')[1]
+        x.push(time)
+        rain_chance.push(hour.chance_of_rain)
+        rain_precip_mm.push(hour.precip_mm)
+        snow_chance.push(hour.chance_of_snow)
+    }
+    const data = {
+        rain_chance,
+        rain_precip_mm,
+        snow_chance
+    }
+    createRainSnowChart(x,data)
+}
+
+

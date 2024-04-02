@@ -24,7 +24,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.91.0",
     "webpack-bundle-analyzer": "^4.10.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "terser-webpack-plugin": "^5.3.10"
   },
   "description": "",
   "dependencies": {
