@@ -1,0 +1,15 @@
+meta {
+  name: Get Weather Data
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://127.0.0.1:5000/data?location=London
+  body: none
+  auth: none
+}
+
+query {
+  location: London
+}
