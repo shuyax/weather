@@ -11,7 +11,6 @@ CORS(app)
 @app.route("/data", methods=['GET', 'POST'])
 def fetch_data():
     location = request.args.get('location')
-    print(location)
     if not location:
         return jsonify({'error': 'Location parameter is missing'}), 400
     weather_api_key = os.getenv('WEATHER_API_KEY')
