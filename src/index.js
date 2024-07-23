@@ -1,5 +1,4 @@
 import './style.css';
-import {weather_api_key} from '../api.config'
 // eslint-disable-next-line import/named
 import {showWeather, updateWeather} from './display'
 
@@ -30,8 +29,11 @@ function unitSelectionEvent(current_temperature_c,current_temperature_f,conditio
 
 
 async function getWeather(location){
+    if (location == null) {
+        location = 'Pittsburgh'
+    }
     const header = new Headers();
-    const request = new Request(`http://api.weatherapi.com/v1/forecast.json?key=${ weather_api_key }&q=${ location }&days=3&aqi=no&alerts=no`,{
+    const request = new Request(`http://192.3.81.56:5000/data?location=${location}`,{
         method: 'GET',
         headers: header,
         mode: 'cors'
@@ -42,7 +44,6 @@ async function getWeather(location){
             throw new Error('Network response was not OK')
         }
         const data = await result.json()
-        console.log(data.forecast)
         const current_condition_text = data.current.condition.text
         const current_condition_icon_link = data.current.condition.icon
         const current_feelslike_c = data.current.feelslike_c
@@ -90,12 +91,12 @@ function searchLocationEvent(){
     search.addEventListener('click', (event) => {
         event.preventDefault()
         const location_input = document.getElementById('searchInput')
-        console.log(location_input.value)
         if (location_input.value != null){
             getWeather(location_input.value)
-        } 
+        }
+        location_input.value=''
     })
 }
 
 searchLocationEvent()
-getWeather('New York')
+getWeather()
