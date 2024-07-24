@@ -14,7 +14,6 @@ function unitSelectionEvent(current_temperature_c,current_temperature_f,conditio
                 false,
                 current_temperature_c,current_temperature_f,condition_icon,condition_text,current_feelslike_c,current_feelslike_f,uv,humidity,current_wind_kph,current_wind_mph,wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm,hourly_data
                 ) 
-        
         } else {
             console.log('Temperature unit selected: Celsius (°C)');
             updateWeather(
@@ -72,7 +71,7 @@ async function getWeather(location){
         const precip_mm = data.forecast.forecastday[0].day.totalprecip_mm
         const snow_cm = data.forecast.forecastday[0].day.totalsnow_cm
         const hourly_data = data.forecast.forecastday[0].hour
-        
+
         showWeather(current_city,current_state,current_country,current_temperature_c,current_temperature_f,current_condition_icon_link,current_condition_text,current_feelslike_c,current_feelslike_f,current_uv,current_humidity,current_wind_kph,current_wind_mph,current_wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,snow_cm,hourly_data)
         unitSelectionEvent(current_temperature_c,current_temperature_f,current_condition_icon_link,current_condition_text,current_feelslike_c,current_feelslike_f,current_uv,current_humidity,current_wind_kph,current_wind_mph,current_wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,snow_cm,hourly_data)
     } catch (error) {
