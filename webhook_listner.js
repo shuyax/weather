@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
   if (req.body.ref === 'refs/heads/main') { // Adjust branch as needed
-    exec('sh /path/to/deploy.sh', (err, stdout, stderr) => {
+    exec('sh /home/shuya/weather/deploy.sh', (err, stdout, stderr) => {
       if (err) {
         console.error(`exec error: ${err}`);
         return res.status(500).send('Deployment failed');
