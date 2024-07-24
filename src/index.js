@@ -2,7 +2,6 @@ import './style.css';
 // eslint-disable-next-line import/named
 import {showWeather, updateWeather} from './display'
 
-
 function unitSelectionEvent(current_temperature_c,current_temperature_f,condition_icon,condition_text,current_feelslike_c,current_feelslike_f,uv,humidity,current_wind_kph,current_wind_mph,wind_direction,forecast_today_max_temperature_c,forecast_today_max_temperature_f,forecast_today_min_temperature_c,forecast_today_min_temperature_f,forecast_today_sunrise,forecast_today_sunset,forecast_today_daily_chance_of_rain,forecast_today_daily_will_it_rain,precip_in,precip_mm,forecast_today_daily_chance_of_snow,forecast_today_daily_will_it_snow,totalsnow_cm,hourly_data) {
     const unit = document.querySelector('.temperature-toggler')
     unit.addEventListener('change', () => {
