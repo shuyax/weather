@@ -23,6 +23,7 @@ function unitSelectionEvent(current_temperature_c,current_temperature_f,conditio
     })
 }
 
+
 async function getWeather(location){
     if (location == null) {
         location = 'Pittsburgh'
