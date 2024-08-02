@@ -28,7 +28,7 @@ async function getWeather(location){
         location = 'Pittsburgh'
     }
     const header = new Headers();
-    const request = new Request(`https://www.shuyaxu.com/api?location=${location}`,{
+    const request = new Request(`https://www.shuyaxu.com/weather/api?location=${location}`,{
         method: 'GET',
         headers: header,
         mode: 'cors'
